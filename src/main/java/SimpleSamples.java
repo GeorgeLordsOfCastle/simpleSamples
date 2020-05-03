@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,5 +22,21 @@ public class SimpleSamples {
         return listOfList.stream()
                 .flatMap(List::stream)
                 .collect(Collectors.toList());
+    }
+
+    public static Integer listOfIntToSum(List<Integer> integerList) {
+        return integerList.stream().reduce(0, Integer::sum);
+    }
+
+    public static Double listOfDoubleToSum(List<Double> doubleList) {
+        return doubleList.stream().reduce(0.0, Double::sum);
+    }
+
+    public static BigInteger listOfBigIntegerToSum(List<BigInteger> bigIntegerList) {
+        return bigIntegerList.stream().reduce(BigInteger.ZERO, BigInteger::add);
+    }
+
+    public static BigDecimal listOfBigDecimalToSum(List<BigDecimal> bigDecimalList) {
+        return bigDecimalList.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
