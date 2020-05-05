@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class SimpleSamplesTest {
     @Test
@@ -73,5 +74,40 @@ public class SimpleSamplesTest {
 
     private void assertBigDecimalIs(BigDecimal actual, BigDecimal expected) {
         Assert.assertThat(actual.compareTo(expected), Is.is(0));
+    }
+
+    @Test
+    public void listOfIntegerToMaxTest() {
+        Optional<Integer> maxOptional = SimpleSamples.listOfIntegerToMax(Arrays.asList(5, 6, 2));
+        Assert.assertThat(maxOptional.isPresent(), Is.is(true));
+        Assert.assertThat(maxOptional.get(), Is.is(6));
+    }
+
+    @Test
+    public void listOfDoubleToMaxTest() {
+        Optional<Double> maxOptional = SimpleSamples.listOfDoubleToMax(Arrays.asList(5.1, 6.3, 2.0));
+        Assert.assertThat(maxOptional.isPresent(), Is.is(true));
+        Assert.assertThat(maxOptional.get(), Is.is(6.3));
+    }
+
+    @Test
+    public void listOfBigIntegerToMaxTest() {
+        Optional<BigInteger> maxOptional = SimpleSamples.listOfBigIntegerToMax(Arrays.asList(new BigInteger("5"), new BigInteger("6"), new BigInteger("2")));
+        Assert.assertThat(maxOptional.isPresent(), Is.is(true));
+        Assert.assertThat(maxOptional.get(), Is.is(new BigInteger("6")));
+    }
+
+    @Test
+    public void listOfBigDecimalToMaxTest() {
+        Optional<BigDecimal> maxOptional = SimpleSamples.listOfBigDecimalToMax(Arrays.asList(new BigDecimal("5.0"), new BigDecimal("6.1"), new BigDecimal("2.5")));
+        Assert.assertThat(maxOptional.isPresent(), Is.is(true));
+        Assert.assertThat(maxOptional.get(), Is.is(new BigDecimal("6.1")));
+    }
+
+    @Test
+    public void listOfBigDecimalToCustomMaxTest() {
+        Optional<BigDecimal> maxOptional = SimpleSamples.listOfBigDecimalToCustomMax(Arrays.asList(new BigDecimal("7.81"), new BigDecimal("5.19"), new BigDecimal("2.53")));
+        Assert.assertThat(maxOptional.isPresent(), Is.is(true));
+        Assert.assertThat(maxOptional.get(), Is.is(new BigDecimal("5.19")));
     }
 }
